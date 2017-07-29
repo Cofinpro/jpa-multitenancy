@@ -1,0 +1,40 @@
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath "io.spring.gradle:dependency-management-plugin:1.0.3.RELEASE"
+        classpath "org.wildfly.swarm:wildfly-swarm-gradle-plugin:2017.6.1"
+    }
+}
+
+apply plugin: "io.spring.dependency-management"
+apply plugin: 'wildfly-swarm'
+apply plugin: 'java'
+apply plugin: 'application'
+apply plugin: 'war'
+
+mainClassName = 'org.wildfly.swarm.Swarm'
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    maven {
+        url 'https://repository.jboss.org/nexus/content/groups/public/'
+    }
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.wildfly.swarm:bom-all:2017.6.1"
+    }
+}
+
+dependencies {
+    compile "org.wildfly.swarm:jaxrs"
+    compile "org.wildfly.swarm:jpa"
+    compile "org.wildfly.swarm:cdi"
+    compile 'com.h2database:h2:1.4.196'
+}
