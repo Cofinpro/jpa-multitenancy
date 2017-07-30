@@ -2,7 +2,7 @@ swarm:
   jdbc:
     driver: h2
   ds:
-    url: 'jdbc:h2:mem:multitenant'
+    url: "jdbc:h2:mem:multitenant"
     name: multitenant
   jpa:
     default-datasource: multitenant

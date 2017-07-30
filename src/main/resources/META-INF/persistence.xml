@@ -8,9 +8,19 @@
         <class>de.example.multitenant.User</class>
 
         <properties>
-            <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
-            <property name="javax.persistence.schema-generation.create-source" value="metadata"/>
-            <property name="javax.persistence.schema-generation.drop-source" value="metadata"/>
+            <property name="hibernate.multiTenancy" value="SCHEMA"/>
+            <property name="hibernate.multi_tenant_connection_provider"
+                      value="de.example.multitenant.hibernate.TenantConnectionProvider"/>
+            <property name="hibernate.tenant_identifier_resolver"
+                      value="de.example.multitenant.hibernate.CurrentTenantResolver"/>
+
+            <property name="hibernate.dialect"
+                      value="org.hibernate.dialect.H2Dialect"/>
+            <property name = "hibernate.show_sql" value = "true" />
+
+
+            <property name="javax.persistence.schema-generation.database.action"
+                      value="none"/>
         </properties>
     </persistence-unit>
 </persistence>

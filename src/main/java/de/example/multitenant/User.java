@@ -9,6 +9,7 @@ import javax.persistence.*;
         @NamedQuery(name = "User.findAll", query = "select u from User u")
 })
 @Entity
+@Table(name="users")
 public class User {
 
     @Id
@@ -16,6 +17,7 @@ public class User {
     private Long id;
 
     @Basic(optional = false)
+    @Column(name = "user_name")
     private String name;
 
     public Long getId() {

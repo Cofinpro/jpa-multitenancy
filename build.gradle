@@ -5,8 +5,8 @@ buildscript {
     }
 
     dependencies {
-        classpath "io.spring.gradle:dependency-management-plugin:1.0.3.RELEASE"
-        classpath "org.wildfly.swarm:wildfly-swarm-gradle-plugin:2017.6.1"
+        classpath 'io.spring.gradle:dependency-management-plugin:1.0.3.RELEASE'
+        classpath 'org.wildfly.swarm:wildfly-swarm-gradle-plugin:2017.7.0'
     }
 }
 
@@ -28,7 +28,8 @@ repositories {
 
 dependencyManagement {
     imports {
-        mavenBom "org.wildfly.swarm:bom-all:2017.6.1"
+        mavenBom "org.wildfly.swarm:bom-all:2017.7.0"
+        mavenBom "org.jboss.arquillian:arquillian-bom:1.1.10.Final"
     }
 }
 
@@ -37,4 +38,8 @@ dependencies {
     compile "org.wildfly.swarm:jpa"
     compile "org.wildfly.swarm:cdi"
     compile 'com.h2database:h2:1.4.196'
+    compileOnly 'org.hibernate:hibernate-core:5.0.10.Final'
+
+    testCompile 'junit:junit:4.12'
+
 }

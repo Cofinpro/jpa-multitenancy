@@ -1,0 +1,2 @@
+DROP SCHEMA tenant1;
+DROP SCHEMA tenant2;
