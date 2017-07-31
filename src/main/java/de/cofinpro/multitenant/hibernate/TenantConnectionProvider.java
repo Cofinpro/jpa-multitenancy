@@ -1,6 +1,5 @@
 package de.cofinpro.multitenant.hibernate;
 
-import org.hibernate.HibernateException;
 import org.hibernate.cfg.AvailableSettings;
 import org.hibernate.cfg.Environment;
 import org.hibernate.engine.config.spi.ConfigurationService;
@@ -62,44 +61,19 @@ public class TenantConnectionProvider extends AbstractMultiTenantConnectionProvi
         return connectionProvider;
     }
 
-    public Connection getAnyConnection() throws SQLException {
-        return getAnyConnectionProvider().getConnection();
-    }
-
-    @Override
-    public void releaseAnyConnection(Connection connection) throws SQLException {
-        getAnyConnectionProvider().closeConnection(connection);
-    }
-
     @Override
     public Connection getConnection(String tenantIdentifier) throws SQLException {
         log.debugf("Requesting connection for tenant %s", tenantIdentifier);
-
         final Connection connection = getAnyConnection();
-        try {
-            connection.createStatement().execute("USE " + tenantIdentifier);
-        } catch (SQLException e) {
-            throw new HibernateException(
-                    "Could not alter JDBC connection to specified schema [" +
-                            tenantIdentifier + "]",
-                    e
-            );
-        }
+        connection.createStatement().execute("USE " + tenantIdentifier);
         return connection;
     }
 
     @Override
     public void releaseConnection(String tenantIdentifier, Connection connection) throws SQLException {
-        try {
-            connection.createStatement().execute("USE public");
-        } catch (SQLException e) {
-            // on error, throw an exception to make sure the connection is not returned to the pool.
-            // your requirements may differ
-            throw new HibernateException(
-                    "Could not alter JDBC connection to specified schema [" +
-                            tenantIdentifier + "]", e
-            );
-        }
+        final String schema = configurationService.getSetting(
+                AvailableSettings.DEFAULT_SCHEMA, String.class, "public");
+        connection.createStatement().execute("USE " + schema);
         selectConnectionProvider(tenantIdentifier).closeConnection(connection);
     }
 }
