@@ -4,23 +4,20 @@
              version="2.1">
     <persistence-unit name="multitenant" transaction-type="JTA">
         <jta-data-source>java:jboss/datasources/multitenant</jta-data-source>
-
-        <class>de.example.multitenant.User</class>
+        <class>de.cofinpro.multitenant.User</class>
 
         <properties>
+            <!-- Provider specific multi tenancy config -->
             <property name="hibernate.multiTenancy" value="SCHEMA"/>
             <property name="hibernate.multi_tenant_connection_provider"
-                      value="de.example.multitenant.hibernate.TenantConnectionProvider"/>
+                      value="de.cofinpro.multitenant.hibernate.TenantConnectionProvider"/>
             <property name="hibernate.tenant_identifier_resolver"
-                      value="de.example.multitenant.hibernate.CurrentTenantResolver"/>
+                      value="de.cofinpro.multitenant.hibernate.CurrentTenantResolver"/>
 
-            <property name="hibernate.dialect"
-                      value="org.hibernate.dialect.H2Dialect"/>
-            <property name = "hibernate.show_sql" value = "true" />
+            <property name="hibernate.show_sql" value="true"/>
 
-
-            <property name="javax.persistence.schema-generation.database.action"
-                      value="none"/>
+            <!-- schema generation is not supported in multi-tenant environments -->
+            <property name="javax.persistence.schema-generation.database.action" value="none"/>
         </properties>
     </persistence-unit>
 </persistence>

@@ -1,4 +1,4 @@
-package de.example.multitenant;
+package de.cofinpro.multitenant;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;

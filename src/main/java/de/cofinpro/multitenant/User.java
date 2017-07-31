@@ -1,4 +1,4 @@
-package de.example.multitenant;
+package de.cofinpro.multitenant;
 
 import javax.persistence.*;
 

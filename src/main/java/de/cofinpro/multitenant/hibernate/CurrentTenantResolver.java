@@ -1,4 +1,4 @@
-package de.example.multitenant.hibernate;
+package de.cofinpro.multitenant.hibernate;
 
 import org.hibernate.context.spi.CurrentTenantIdentifierResolver;
 

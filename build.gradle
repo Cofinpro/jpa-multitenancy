@@ -41,5 +41,7 @@ dependencies {
     compileOnly 'org.hibernate:hibernate-core:5.0.10.Final'
 
     testCompile 'junit:junit:4.12'
+    testRuntime 'org.hibernate:hibernate-entitymanager:5.0.10.Final'
+
 
 }
