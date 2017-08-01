@@ -6,7 +6,7 @@
 `./gradlew clean wildfly-swarm-package`
 
 
-##Run
+## Run
 
 
 `java -jar ./build/libs/jpa-multitenant-swarm.jar`
