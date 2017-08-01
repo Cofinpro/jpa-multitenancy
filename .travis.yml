@@ -2,7 +2,7 @@ language: java
 
 install: ./gradlew assemble
 script: ./gradlew check
-after_success: ./gradlew wildfly-swam-package
+after_success: ./gradlew wildfly-swarm-package
 
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
